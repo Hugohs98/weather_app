@@ -51,9 +51,9 @@ search.addEventListener('keypress', (e) => {
                     image.src = "image/cloud.png";
                     break;  
 
-                case 'Haze':
+                case 'Mist':
                     image.src = "image/mist.png";
-                    break;
+                    break;  
                 
                 default:
                     image.src = '';
