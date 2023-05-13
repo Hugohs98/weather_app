@@ -4,6 +4,8 @@ const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
 const error404 = document.querySelector('.not-found');
 
+/* `search.addEventListener('click', () => {` is adding an event listener to the search button. When
+the button is clicked, the function inside the arrow function will be executed. */
 search.addEventListener('click', () => {
     const APIKey = '080854301d100b0230fdc63491cbd819';
         const city = document.querySelector(".search-box input").value;
@@ -13,6 +15,12 @@ search.addEventListener('click', () => {
 
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`).then(response => response.json()).then(json => {
 
+           /* This code block is checking if the response from the API has a `cod` property with a
+           value of `'404'`, which indicates that the city entered by the user was not found. If
+           this is the case, it sets the height of the container to `400px`, hides the `weatherBox`
+           and `weatherDetails` elements, displays the `error404` element, adds the `fadeIn` class
+           to the `error404` element, and then exits the function using `return`. This ensures that
+           no further code is executed if the city is not found. */
             if(json.cod === '404'){
                 container.style.height = '400px';
                 weatherBox.style.display = 'none';
@@ -31,6 +39,12 @@ search.addEventListener('click', () => {
             const humidity = document.querySelector('.weather-details .humidity span');
             const wind = document.querySelector('.weather-details .wind span');
 
+           /* This is a switch statement that is checking the value of `json.weather[0].main`, which is
+           the main weather condition of the city returned by the API. Depending on the value of
+           `json.weather[0].main`, the `image.src` property is set to a specific image file. For
+           example, if the main weather condition is "Clear", the `image.src` property is set to
+           "image/clear.png". If the main weather condition is not one of the specified cases, the
+           `default` case is executed and the `image.src` property is set to an empty string. */
             switch (json.weather[0].main){
                 case 'Clear':
                     image.src = "image/clear.png";
@@ -71,9 +85,15 @@ search.addEventListener('click', () => {
 });
 
 
+/* `search.addEventListener('keypress', (e) =>` is adding an event listener to the search input field.
+When a key is pressed while the input field is in focus, the function inside the arrow function will
+be executed. In this case, the function checks if the key pressed is the "Enter" key, and if it is,
+it triggers the same functionality as the click event listener added to the search button. This
+allows the user to search for a city by either clicking the search button or pressing the "Enter"
+key while the search input field is in focus. */
 search.addEventListener('keypress', (e) => {
 
-    if(e.key === 'Enter' || e === 'Click') {
+    if(e.key === 'Enter') {
     
         const APIKey = '080854301d100b0230fdc63491cbd819';
         const city = document.querySelector(".search-box input").value;
