@@ -7,7 +7,10 @@ const error404 = document.querySelector('.not-found');
 /* `search.addEventListener('click', () => {` is adding an event listener to the search button. When
 the button is clicked, the function inside the arrow function will be executed. */
 search.addEventListener('click', searchWeather);
-search.addEventListener('keypress', searchWeather);
+search.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        return searchWeather()}});
+
 function searchWeather() {
     const APIKey = '080854301d100b0230fdc63491cbd819';
         const city = document.querySelector(".search-box input").value;
